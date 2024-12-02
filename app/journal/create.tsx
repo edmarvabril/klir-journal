@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useJournals } from "../../hooks/useJournal";
 import { TextInput, Button, Text } from "react-native-paper";
 import { useRouter } from "expo-router";
@@ -36,16 +36,23 @@ export default function CreateJournal() {
         onChangeText={setBody}
         multiline
         numberOfLines={5}
-        style={[styles.marginBottomMedium]}
+        style={[styles.marginBottomMedium, localStyles.bodyInput]}
       />
       <Button
         mode="contained"
         onPress={handleSubmit}
         loading={isCreatingJournal}
         disabled={isCreatingJournal}
+        style={[styles.buttonPrimary, styles.marginTopMedium]}
       >
         {isCreatingJournal ? "Saving..." : "Save"}
       </Button>
     </View>
   );
 }
+
+const localStyles = StyleSheet.create({
+  bodyInput: {
+    height: 120,
+  },
+});

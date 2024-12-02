@@ -9,13 +9,26 @@ export function JournalCard({ journal }: { journal: Journal }) {
 
   return (
     <Card
-      style={[styles.marginSmall]}
+      elevation={0}
+      style={[
+        styles.marginSmall,
+        styles.border,
+        styles.rounded,
+        styles.bgSecondary,
+      ]}
       onPress={() => router.push(`/journal/${journal.id}`)}
     >
-      <Card.Title title={journal.title} subtitle={journal.date} />
+      <Card.Title
+        titleStyle={[styles.textPrimary, styles.textBold]}
+        subtitleStyle={[styles.textSecondary]}
+        title={journal.title}
+        subtitle={journal.date}
+      />
       <Card.Content>
         <Card.Content>
-          <Text numberOfLines={2}>{journal.body}</Text>
+          <Text style={[styles.textPrimary]} numberOfLines={2}>
+            {journal.body}
+          </Text>
         </Card.Content>
       </Card.Content>
     </Card>

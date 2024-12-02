@@ -1,3 +1,4 @@
+import { theme } from "@/styles/theme";
 import { StyleSheet } from "react-native";
 
 export const useStyles = () =>
@@ -34,9 +35,6 @@ export const useStyles = () =>
     },
     textBold: {
       fontWeight: "bold",
-    },
-    textGray: {
-      color: "#6b7280",
     },
 
     // Font size utilities
@@ -82,20 +80,50 @@ export const useStyles = () =>
       padding: 16,
     },
 
-    // Borders
+    // Backgrounds
+    bgPrimary: {
+      backgroundColor: theme.colors.primary,
+    },
+    bgSecondary: {
+      backgroundColor: theme.colors.secondary,
+    },
+    bgAccent: {
+      backgroundColor: theme.colors.accent1,
+    },
+    bgWhite: {
+      backgroundColor: theme.colors.background,
+    },
+
+    // Text colors
+    textPrimary: {
+      color: theme.colors.textPrimary,
+    },
+    textSecondary: {
+      color: theme.colors.textSecondary,
+    },
+    textAccent1: {
+      color: theme.colors.accent1,
+    },
+    textAccent2: {
+      color: theme.colors.accent2,
+    },
+
+    // Borders and Dividers
     border: {
+      borderColor: theme.colors.divider,
       borderWidth: 1,
-      borderColor: "#ccc",
     },
     rounded: {
       borderRadius: 8,
     },
 
-    // Backgrounds
-    bgWhite: {
-      backgroundColor: "#fff",
+    // Buttons
+    buttonPrimary: {
+      backgroundColor: theme.colors.primary,
+      color: theme.colors.background,
     },
-    bgGray: {
-      backgroundColor: "#f3f4f6",
+    buttonSecondary: {
+      backgroundColor: theme.colors.secondary,
+      color: theme.colors.textPrimary,
     },
   });

@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { useJournal, useJournals } from "../../hooks/useJournal";
 import { Card, Button, Text } from "react-native-paper";
 import { useStyles } from "@/hooks/useStyles";
+import { Loader } from "@/components/Loader";
 
 export default function JournalDetail() {
   const { id } = useGlobalSearchParams();
@@ -17,7 +18,7 @@ export default function JournalDetail() {
     });
   };
 
-  if (isFetchingJournal) return <Text>Loading...</Text>;
+  if (isFetchingJournal) return <Loader />;
 
   return (
     <View style={[styles.flex, styles.marginMedium]}>
@@ -32,7 +33,7 @@ export default function JournalDetail() {
         onPress={handleDelete}
         loading={isDeletingJournal}
         disabled={isDeletingJournal}
-        style={[styles.marginTopMedium]}
+        style={[styles.bgAccent, styles.marginTopMedium]}
       >
         {isDeletingJournal ? "Deleting..." : "Delete"}
       </Button>
