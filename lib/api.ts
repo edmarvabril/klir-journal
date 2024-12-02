@@ -1,7 +1,7 @@
 import { Journal } from "@/types/journal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const delay = () => new Promise((resolve) => setTimeout(resolve, 2000));
+const delay = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
 export const fetchJournals = async (): Promise<Journal[]> => {
   await delay();

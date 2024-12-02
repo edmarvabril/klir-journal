@@ -1,28 +1,23 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Card, Text } from "react-native-paper";
+import { useRouter } from "expo-router";
+import { Journal } from "@/types/journal";
+import { useStyles } from "@/hooks/useStyles";
 
-export function JournalCard({ date, title }) {
+export function JournalCard({ journal }: { journal: Journal }) {
+  const router = useRouter();
+  const styles = useStyles();
+
   return (
-    <View style={styles.card}>
-      <Text style={styles.date}>{date}</Text>
-      <Text style={styles.title}>{title}</Text>
-    </View>
+    <Card
+      style={[styles.marginSmall]}
+      onPress={() => router.push(`/journal/${journal.id}`)}
+    >
+      <Card.Title title={journal.title} subtitle={journal.date} />
+      <Card.Content>
+        <Card.Content>
+          <Text numberOfLines={2}>{journal.body}</Text>
+        </Card.Content>
+      </Card.Content>
+    </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    padding: 10,
-    marginVertical: 5,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-  },
-  date: {
-    fontSize: 12,
-    color: "#999",
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});

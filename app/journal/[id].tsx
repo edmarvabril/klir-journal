@@ -1,29 +1,41 @@
 import { useRouter, useGlobalSearchParams } from "expo-router";
-import { View, Text, Button } from "react-native";
+import { View } from "react-native";
 import { useJournal, useJournals } from "../../hooks/useJournal";
+import { Card, Button, Text } from "react-native-paper";
+import { useStyles } from "@/hooks/useStyles";
 
 export default function JournalDetail() {
+  const { id } = useGlobalSearchParams();
   const router = useRouter();
-  const params = useGlobalSearchParams();
-  const id = Array.isArray(params.id) ? params.id[0] : params.id;
-  const { journal, isFetchingJournal } = useJournal(id);
+  const styles = useStyles();
+  const { journal, isFetchingJournal } = useJournal(id as string);
   const { deleteJournal, isDeletingJournal } = useJournals();
 
   const handleDelete = () => {
-    deleteJournal(id, {
+    deleteJournal(id as string, {
       onSuccess: () => router.push("/"),
     });
   };
 
   if (isFetchingJournal) return <Text>Loading...</Text>;
-  if (isDeletingJournal) return <Text>Deleting...</Text>;
 
   return (
-    <View>
-      <Text>{journal?.date}</Text>
-      <Text>{journal?.title}</Text>
-      <Text>{journal?.body}</Text>
-      <Button title="Delete" onPress={handleDelete} />
+    <View style={[styles.flex, styles.marginMedium]}>
+      <Card>
+        <Card.Title title={journal?.title} subtitle={journal?.date} />
+        <Card.Content>
+          <Text>{journal?.body}</Text>
+        </Card.Content>
+      </Card>
+      <Button
+        mode="contained"
+        onPress={handleDelete}
+        loading={isDeletingJournal}
+        disabled={isDeletingJournal}
+        style={[styles.marginTopMedium]}
+      >
+        {isDeletingJournal ? "Deleting..." : "Delete"}
+      </Button>
     </View>
   );
 }
